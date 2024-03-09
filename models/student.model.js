@@ -1,4 +1,4 @@
-module.exports = (database,Sequelize,DataTypes)=>{
+module.exports = (database,DataTypes)=>{
     const Student = database.define(
         "student",//model name
         {   
@@ -14,14 +14,14 @@ module.exports = (database,Sequelize,DataTypes)=>{
                 allownull:false
             },
             note_Math:{
-                type:DataTypes.INTEGER,
+                type:DataTypes.DOUBLE,
                 validate:{
                     min:0,
                     max:20
                 }
             },
             note_Phy:{
-                type:DataTypes.INTEGER,
+                type:DataTypes.DOUBLE,
                 validate:{
                     min:0,
                     max:20
