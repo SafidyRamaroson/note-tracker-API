@@ -3,7 +3,7 @@ module.exports = (database,DataTypes)=>{
         "student",//model name
         {   
             // Model attributes
-            num_id:{
+            id_student:{
                 type:DataTypes.INTEGER,
                 allownull:false,
                 autoIncrement:true,
@@ -30,7 +30,7 @@ module.exports = (database,DataTypes)=>{
         },
         {
             // option
-            timestamps:true
+            timestamps:false,
         }
     );
 
