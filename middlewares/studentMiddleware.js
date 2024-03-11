@@ -1,13 +1,13 @@
-const db = require("./../models/index.js")
+const db = require("./../models/index.js");
 
 // create student 
 const createStudent = async(req,res)=>{
     const data = req.body;
     try {
         const student = await db.students.create(data);
-        res.send(student)
+        res.status(201).send(student);
     } catch (error) {
-        console.error(error)
+        console.error(error);
     }
 }
 
@@ -15,17 +15,17 @@ const createStudent = async(req,res)=>{
 const retrieveOneStudent = async(req,res)=>{
     const id = req.params.id;
     try {
-        const student = await db.students.findOne({where:{id}});
+        const student = await db.students.findOne({where:{id_student:id}});
         //if student don't exist in DB 
         if(!student){
-            res.send({
+            return  res.status(204).send({
                 student:"Student not found"
-            })
+            });
         }
         
-        res.send({
+        res.status(200).send({
             Student:student
-        })
+        });
     }catch(error){
         console.error(error);
     }
@@ -38,10 +38,10 @@ const updateStudent = async(req,res)=>{
     const data = req.body;
 
     try {
-        await db.students.update(data,{where:{id}});
+        await db.students.update(data,{where:{id_student:id}});
         res.send("Student updated");
     } catch (error) {
-        res.send(error)
+        res.send(error.errors[0].message)
     }
 }
 
@@ -49,12 +49,13 @@ const updateStudent = async(req,res)=>{
 const deleteStudent = async(req,res)=>{
     const id = req.params.id;
     try {
-        await db.students.destroy({where:{id}})
-        res.send("Student deleted")
+        await db.students.destroy({where:{id_student:id}});
+        res.status(204).send("Student deleted");
     } catch (error) {
-        res.send(error)
+        res.send(error);
     }
 }
+
 
 
 
