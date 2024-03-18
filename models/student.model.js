@@ -4,13 +4,12 @@ module.exports = (database,DataTypes)=>{
         {   
             // Model attributes
             id_student:{
-                type:DataTypes.INTEGER,
+                type:DataTypes.STRING(10),
                 allownull:false,
-                autoIncrement:true,
                 primaryKey:true
             },
             name:{
-                type:DataTypes.STRING,
+                type:DataTypes.STRING(25),
                 allownull:false
             },
             note_Math:{

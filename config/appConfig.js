@@ -1,5 +1,8 @@
 const corsOptions = {
-    origin:"http://localhost:5000"
+    header:"Access-Control-Allow-Origin",
+    origin:"*",
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
 };
 
-module.exports = corsOptions
+module.exports = corsOptions;

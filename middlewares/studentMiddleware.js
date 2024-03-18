@@ -1,11 +1,13 @@
 const db = require("./../models/index.js");
-
+const { Sequelize } = require("sequelize");
 // create student 
 const createStudent = async(req,res)=>{
     const data = req.body;
     try {
-        const student = await db.students.create(data);
-        res.status(201).send(student);
+        await db.students.create(data);
+        res.status(201).send({
+            message:"Student created successfully !"
+        });
     } catch (error) {
         console.error(error);
     }
@@ -56,13 +58,43 @@ const deleteStudent = async(req,res)=>{
     }
 }
 
+//get all notes
+const notesList = async(req,res)=>{
+    try {
+        const notesList = await db.students.findAll();
+        //if notesList is null
+        if(!notesList){
+            res.send({
+                message:"Notes list is none"
+            });
+        }
+        res.status(200).send(notesList);
+    } catch (error) {
+        res.send(error);
+    }
+}
 
 
+//get list of average note students 
+const listOfAverageStudents = async(req,res) =>{
+    try {
+        const averageNotes = await db.students.findAll({
+            attributes: [
+                [Sequelize.literal('(`note_Math` + `note_Phy`) / 2'), 'average_note']
+            ]
+        });
 
+        res.send(averageNotes);
+    } catch (err) {
+        console.error("Error fetching average notes",err);
+    }
+} 
 
 module.exports = {
     createStudent,
     retrieveOneStudent,
     updateStudent,
-    deleteStudent
+    deleteStudent,
+    notesList,
+    listOfAverageStudents,
 }
