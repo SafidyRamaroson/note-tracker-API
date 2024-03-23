@@ -18,6 +18,6 @@ app.use("/api",studentRoutes);
 app.listen(PORT ,()=>{
     console.log(`Server running on port ${PORT}`)
 });
+db.databaseConf.sync();
 // db.students.drop();
-// db.databaseConf.sync();
 
